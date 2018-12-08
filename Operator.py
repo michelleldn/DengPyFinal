@@ -167,8 +167,8 @@ class Operator(object):
         :return: portfolio return - in dataframe
         '''
         # get weighted return
-        # wRet = weight*ret
-        wRet = ret * ret
+        wRet = weight*ret
+        # wRet = ret * ret
         sumRet = wRet.sum()
         return sumRet
 
