@@ -30,23 +30,24 @@ if __name__ == '__main__':
         # calculate expected return/ var/ cov for current date
         # print(1)
         eR, var, cov = op.getER_Var_Cov(selectStocksDic, currentMon, currentYr)
+        # print(eR)
 
         # initiate models and get predicted returns(CTEF)
-        model = Model(eR, var, cov)
-        predX = model.tenFactorModel()
+        model = Model(eR, var, cov, rawData)
+        predX = model.tenFactorModel(date)
         # predX = model.selfDesignModel()
 
-        # use mean variance model to generate optimize weight of portfolio
-        optWeight = model.meanVarModel(predX)
-
-        # calculate optimize return
-        optRet.append(op.calOptRet(optWeight, predX))
-
-    optRet = pd.DataFrame(np.array(optRet), columns=['optReturn'], index=dateList)
-    # calculate information ratio and max drawdown for portfolio strategy
-    infoR, mDD = op.evaluateIndicator(optRet)
-    print('information ratio: ', infoR)
-    print('max drawdown: ', mDD)
+    #     # use mean variance model to generate optimize weight of portfolio
+    #     optWeight = model.meanVarModel(eR, cov)
+    #
+    #     # calculate optimize return
+    #     optRet.append(op.calOptRet(optWeight, predX))
+    #
+    # optRet = pd.DataFrame(np.array(optRet), columns=['optReturn'], index=dateList)
+    # # calculate information ratio and max drawdown for portfolio strategy
+    # infoR, mDD = op.evaluateIndicator(optRet)
+    # print('information ratio: ', infoR)
+    # print('max drawdown: ', mDD)
 
 
 
